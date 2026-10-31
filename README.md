@@ -44,12 +44,12 @@ npm run record
 
 Open the form without installing anything:
 
-https://marawan10.github.io/police-report-registration/
+https://omarkhalidrashad-oss.github.io/police-report-registration/demo/
 
 The suite reads `BASE_URL`. Against the hosted page:
 
 ```powershell
-$env:BASE_URL = "https://marawan10.github.io/police-report-registration/"
+$env:BASE_URL = "https://omarkhalidrashad-oss.github.io/police-report-registration/demo/"
 npm test
 ```
 
