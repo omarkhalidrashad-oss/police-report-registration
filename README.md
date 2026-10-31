@@ -72,5 +72,5 @@ Comments in `demo/app.js` and the spec files mark catalogue text and assumption 
 2. `npx playwright install chromium`
 3. `npm test` لتشغيل كل السكربتات
 4. `npm start` ثم افتح http://127.0.0.1:4173 لتجربة الفورم
-5. أو افتح الفورم مباشرة من https://marawan10.github.io/police-report-registration/
+5. أو افتح الفورم مباشرة من https://omarkhalidrashad-oss.github.io/police-report-registration/demo/
 6. ملف الإكسل وملف المراجعة داخل `docs`
