@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>تسجيل بيانات المحضر</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <div>
+        <p class="brand">منظومة المحاضر</p>
+        <p class="env">بيئة تدريب</p>
+      </div>
+      <p class="request-chip">الطلب الحالي: REQ-2026-001</p>
+    </div>
+  </header>
+
+  <main>
+    <section id="view-request" data-testid="view-request">
+      <p class="eyebrow">الطلب الحالي</p>
+      <h1>طلب رقم <span id="request-id" data-testid="request-id">REQ-2026-001</span></h1>
+      <p class="lead">سجّل بيانات المحضر واربط الأطراف بهذا الطلب.</p>
+
+      <section class="card">
+        <h2>الأطراف المسجلون في الطلب</h2>
+        <ul id="request-parties" data-testid="request-parties"></ul>
+        <button id="open-report" data-testid="open-report" class="primary" type="button">تسجيل بيانات المحضر</button>
+      </section>
+
+      <article id="request-saved-card" class="card" data-testid="request-saved-card" hidden>
+        <h2>المحضر المرتبط بالطلب</h2>
+        <table>
+          <tbody>
+            <tr><th>رقم الطلب</th><td id="request-saved-request-id" data-testid="request-saved-request-id"></td></tr>
+            <tr><th>المحافظة</th><td id="request-saved-governorate" data-testid="request-saved-governorate"></td></tr>
+            <tr><th>قسم الشرطة</th><td id="request-saved-station" data-testid="request-saved-station"></td></tr>
+            <tr><th>رقم المحضر</th><td id="request-saved-number" data-testid="request-saved-number"></td></tr>
+            <tr><th>تاريخ المحضر</th><td id="request-saved-date" data-testid="request-saved-date"></td></tr>
+            <tr><th>نوع المحضر</th><td id="request-saved-type" data-testid="request-saved-type"></td></tr>
+            <tr><th>السنة</th><td id="request-saved-year" data-testid="request-saved-year"></td></tr>
+            <tr><th>مقدم من</th><td id="request-saved-complainant" data-testid="request-saved-complainant"></td></tr>
+            <tr><th>ضد من</th><td id="request-saved-defendant" data-testid="request-saved-defendant"></td></tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section id="view-report" data-testid="view-report" hidden>
+      <p class="eyebrow">تسجيل بيانات المحضر</p>
+      <h1>بيانات المحضر</h1>
+      <p class="lead">الحقول التي عليها <span class="req">*</span> إجبارية.</p>
+
+      <form id="report-form" novalidate>
+        <section class="card">
+          <h2>بيانات المحضر</h2>
+          <div class="grid">
+            <div class="field">
+              <label for="governorate">المحافظة <span class="req">*</span></label>
+              <select id="governorate" data-testid="governorate"></select>
+              <p class="error" id="error-governorate" data-testid="error-governorate" hidden></p>
+            </div>
+            <div class="field">
+              <label for="police-station">قسم الشرطة <span class="req">*</span></label>
+              <select id="police-station" data-testid="police-station"></select>
+              <p class="error" id="error-police-station" data-testid="error-police-station" hidden></p>
+            </div>
+            <div class="field">
+              <label for="report-number">رقم المحضر <span class="req">*</span></label>
+              <!-- text, not type=number, so six digits and leading zeros stay as typed until save -->
+              <input id="report-number" data-testid="report-number" type="text" inputmode="numeric" maxlength="6" autocomplete="off" spellcheck="false" />
+              <p class="hint">أرقام فقط، من 1 إلى 999999، بحد أقصى 6 أرقام.</p>
+              <p class="error" id="error-report-number" data-testid="error-report-number" hidden></p>
+            </div>
+            <div class="field">
+              <label for="report-date">تاريخ المحضر <span class="req">*</span></label>
+              <input id="report-date" data-testid="report-date" type="date" />
+              <p class="hint">التنسيق: <span id="date-display" data-testid="date-display">—</span> (DD/MM/YYYY). لا يُقبل تاريخ في المستقبل.</p>
+              <p class="error" id="error-report-date" data-testid="error-report-date" hidden></p>
+            </div>
+            <div class="field">
+              <label for="report-type">نوع المحضر <span class="req">*</span></label>
+              <select id="report-type" data-testid="report-type"></select>
+              <p class="error" id="error-report-type" data-testid="error-report-type" hidden></p>
+            </div>
+            <div class="field">
+              <label for="year">السنة <span class="req">*</span></label>
+              <select id="year" data-testid="year"></select>
+              <p class="error" id="error-year" data-testid="error-year" hidden></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>أطراف المحضر</h2>
+          <div class="grid">
+            <div class="field">
+              <label for="complainant">مقدم من <span class="req">*</span></label>
+              <select id="complainant" data-testid="complainant"></select>
+              <p class="error" id="error-complainant" data-testid="error-complainant" hidden></p>
+            </div>
+            <div class="field">
+              <label for="defendant">ضد من <span class="req">*</span></label>
+              <select id="defendant" data-testid="defendant"></select>
+              <p class="error" id="error-defendant" data-testid="error-defendant" hidden></p>
+            </div>
+          </div>
+          <p class="error form-error" id="error-same-party" data-testid="error-same-party" hidden></p>
+          <button id="add-party" data-testid="add-party" class="linkish" type="button">إضافة</button>
+          <p class="hint">يفتح حقلاً لاسم طرف غير موجود في القائمتين.</p>
+        </section>
+
+        <div class="actions">
+          <button id="save" data-testid="save" class="primary" type="submit">حفظ</button>
+          <button id="back" data-testid="back" class="secondary" type="button">رجوع</button>
+        </div>
+
+        <table id="saved-summary" class="card summary" data-testid="saved-summary" hidden>
+          <caption>المحضر المرتبط بهذا الطلب</caption>
+          <tbody>
+            <tr><th>رقم الطلب</th><td id="saved-request-id" data-testid="saved-request-id"></td></tr>
+            <tr><th>المحافظة</th><td id="saved-governorate" data-testid="saved-governorate"></td></tr>
+            <tr><th>قسم الشرطة</th><td id="saved-station" data-testid="saved-station"></td></tr>
+            <tr><th>رقم المحضر</th><td id="saved-number" data-testid="saved-number"></td></tr>
+            <tr><th>تاريخ المحضر</th><td id="saved-date" data-testid="saved-date"></td></tr>
+            <tr><th>نوع المحضر</th><td id="saved-type" data-testid="saved-type"></td></tr>
+            <tr><th>السنة</th><td id="saved-year" data-testid="saved-year"></td></tr>
+            <tr><th>مقدم من</th><td id="saved-complainant" data-testid="saved-complainant"></td></tr>
+            <tr><th>ضد من</th><td id="saved-defendant" data-testid="saved-defendant"></td></tr>
+          </tbody>
+        </table>
+      </form>
+    </section>
+  </main>
+
+  <footer>بيانات المحافظات والأطراف في هذه الصفحة بيانات تدريبية وليست حقيقية.</footer>
+
+  <dialog id="add-dialog" data-testid="add-dialog">
+    <h2>إضافة طرف</h2>
+    <p class="lead">أدخل اسم الطرف الجديد. الحفظ هنا يضيفه إلى الطلب مباشرة.</p>
+    <label for="party-name">اسم الطرف</label>
+    <input id="party-name" data-testid="party-name" type="text" autocomplete="off" />
+    <p class="error" id="error-party-name" data-testid="error-party-name" hidden></p>
+    <div class="actions">
+      <button id="add-confirm" data-testid="add-confirm" class="primary" type="button">حفظ</button>
+      <button id="add-cancel" data-testid="add-cancel" class="secondary" type="button">إلغاء</button>
+    </div>
+  </dialog>
+
+  <dialog id="unsaved-dialog" data-testid="unsaved-dialog">
+    <h2>تأكيد التراجع</h2>
+    <p id="unsaved-message" data-testid="unsaved-message"></p>
+    <div class="actions">
+      <button id="unsaved-yes" data-testid="unsaved-yes" class="primary" type="button">نعم</button>
+      <button id="unsaved-no" data-testid="unsaved-no" class="secondary" type="button">إلغاء</button>
+    </div>
+  </dialog>
+
+  <div id="toast" class="toast" data-testid="toast" role="status" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>
